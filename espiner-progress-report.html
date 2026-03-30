@@ -2,290 +2,226 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Espiner — Bag Strength Test Development | Progress Report</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-  :root {
-    --copper-dark:    #7A3B1E;
-    --copper-mid:     #B5621E;
-    --copper:         #C8782A;
-    --copper-light:   #D4956A;
-    --copper-pale:    #EDD5B8;
-    --copper-ghost:   #FBF3EC;
-    --copper-rule:    #C8782A44;
-    --text-dark:      #2C1508;
-    --text-mid:       #5C3320;
-    --text-light:     #8A5C3A;
-    --white:          #FFFFFF;
-    --accent-green:   #2E7D4F;
-    --accent-amber:   #B8860B;
-    --accent-red:     #9B2335;
-  }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
     font-size: 7.6pt;
-    color: var(--text-dark);
-    background: var(--white);
+    color: #2C1508;
+    background: #FFFFFF;
     width: 210mm;
-    min-height: 297mm;
-    margin: 0 auto;
     line-height: 1.35;
   }
 
-  /* ── HEADER ── */
+  /* HEADER */
   .header {
-    background: linear-gradient(135deg, var(--copper-dark) 0%, var(--copper-mid) 55%, var(--copper) 100%);
-    padding: 11px 18px 10px;
+    background: #8B4010;
+    padding: 10px 16px 9px;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    border-bottom: 3px solid var(--copper-light);
+    border-bottom: 3px solid #D4956A;
   }
-  .header-left h1 {
-    font-size: 13pt;
-    font-weight: 700;
-    color: var(--white);
-    letter-spacing: 0.01em;
+  .header h1 {
+    font-size: 12.5pt;
+    font-weight: bold;
+    color: #FFFFFF;
     line-height: 1.1;
   }
-  .header-left h2 {
-    font-size: 8pt;
-    font-weight: 400;
-    color: var(--copper-pale);
-    margin-top: 2px;
-    letter-spacing: 0.04em;
-  }
-  .header-right {
-    text-align: right;
-  }
-  .header-right .label {
-    font-size: 6.5pt;
-    color: var(--copper-pale);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-weight: 500;
-  }
-  .header-right .value {
+  .header h2 {
     font-size: 7.5pt;
-    color: var(--white);
-    font-weight: 500;
+    font-weight: normal;
+    color: #EDD5B8;
+    margin-top: 2px;
+  }
+  .header-right { text-align: right; }
+  .header-right .lbl {
+    font-size: 6pt;
+    color: #EDD5B8;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .header-right .val {
+    font-size: 7pt;
+    color: #FFFFFF;
+    font-weight: bold;
     margin-top: 1px;
   }
-  .confidential-bar {
-    background: var(--copper-dark);
-    padding: 2.5px 18px;
-    font-size: 6pt;
-    color: var(--copper-pale);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    font-weight: 600;
-  }
 
-  /* ── BODY LAYOUT ── */
-  .body {
-    padding: 10px 18px 10px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
-    gap: 0 12px;
-  }
-
-  /* ── SECTION HEADERS ── */
-  .section-title {
-    font-size: 6.8pt;
-    font-weight: 700;
-    text-transform: uppercase;
+  .conf-bar {
+    background: #6B2F10;
+    padding: 2px 16px;
+    font-size: 5.8pt;
+    color: #EDD5B8;
     letter-spacing: 0.1em;
-    color: var(--copper-mid);
-    border-bottom: 1.5px solid var(--copper);
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  /* SUMMARY */
+  .summary {
+    margin: 8px 16px 6px;
+    background: #FBF3EC;
+    border-left: 3px solid #C8782A;
+    padding: 5px 9px;
+  }
+  .summary p {
+    font-size: 7.3pt;
+    color: #5C3320;
+    line-height: 1.4;
+  }
+  .summary b { color: #7A3B1E; }
+
+  /* TWO COLUMNS */
+  .cols {
+    display: flex;
+    gap: 12px;
+    padding: 0 16px;
+    margin-top: 6px;
+  }
+  .col-l { width: 52%; flex-shrink: 0; }
+  .col-r { width: 48%; flex-shrink: 0; }
+
+  /* SECTION TITLE */
+  .sec {
+    font-size: 6.6pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: #B5621E;
+    border-bottom: 1.5px solid #C8782A;
     padding-bottom: 2px;
     margin-bottom: 5px;
     margin-top: 8px;
   }
-  .section-title:first-child, .col-left .section-title:first-child, .col-right .section-title:first-child {
-    margin-top: 0;
-  }
+  .sec-first { margin-top: 0; }
 
-  /* ── SUMMARY STRIP ── */
-  .summary-strip {
-    grid-column: 1 / -1;
-    background: var(--copper-ghost);
-    border-left: 3px solid var(--copper);
-    padding: 6px 10px;
-    margin-bottom: 4px;
-    border-radius: 0 3px 3px 0;
-  }
-  .summary-strip p {
-    font-size: 7.4pt;
-    color: var(--text-mid);
-    line-height: 1.4;
-  }
-  .summary-strip strong {
-    color: var(--copper-dark);
-    font-weight: 600;
-  }
-
-  /* ── COLUMNS ── */
-  .col-left  { grid-column: 1; }
-  .col-right { grid-column: 2; }
-
-  /* ── ACCOMPLISHMENTS LIST ── */
-  .accomplish-list { list-style: none; }
-  .accomplish-list li {
+  /* BULLET LIST */
+  .blist { list-style: none; }
+  .blist li {
     display: flex;
     align-items: flex-start;
     gap: 5px;
-    margin-bottom: 3.5px;
-    font-size: 7.4pt;
-    color: var(--text-dark);
+    margin-bottom: 3px;
+    font-size: 7.3pt;
   }
-  .accomplish-list li .bullet {
-    width: 13px;
-    height: 13px;
-    min-width: 13px;
+  .dot {
+    width: 12px;
+    height: 12px;
+    min-width: 12px;
     border-radius: 50%;
-    background: var(--copper);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 0.5px;
+    background: #C8782A;
+    margin-top: 1px;
+    display: inline-block;
   }
-  .accomplish-list li .bullet svg { width: 7px; height: 7px; fill: white; }
-  .accomplish-list li .item-text b {
-    color: var(--copper-dark);
-    font-weight: 600;
-  }
+  .blist b { color: #7A3B1E; }
 
-  /* ── TABLES ── */
+  /* TABLES */
   table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 7pt;
+    font-size: 6.9pt;
   }
-  thead tr {
-    background: var(--copper);
-    color: var(--white);
-  }
+  thead tr { background: #C8782A; }
   thead th {
     padding: 3px 5px;
     text-align: left;
-    font-weight: 600;
-    font-size: 6.5pt;
+    font-weight: bold;
+    font-size: 6.2pt;
     letter-spacing: 0.04em;
     text-transform: uppercase;
+    color: #FFFFFF;
   }
-  tbody tr:nth-child(even) { background: var(--copper-ghost); }
-  tbody tr:nth-child(odd)  { background: var(--white); }
+  tbody tr:nth-child(even) { background: #FBF3EC; }
+  tbody tr:nth-child(odd)  { background: #FFFFFF; }
   tbody td {
-    padding: 2.8px 5px;
-    color: var(--text-dark);
+    padding: 2.5px 5px;
     vertical-align: top;
-    border-bottom: 0.5px solid var(--copper-rule);
+    border-bottom: 0.5px solid rgba(200,120,42,0.25);
   }
-  tbody td:first-child { font-weight: 500; color: var(--copper-dark); }
-  .pass  { color: var(--accent-green); font-weight: 600; }
-  .warn  { color: var(--accent-amber); font-weight: 600; }
-  .block { color: var(--accent-red);   font-weight: 600; }
+  td.label-col { font-weight: bold; color: #7A3B1E; }
+  .pass { color: #2E7D4F; font-weight: bold; }
 
-  /* ── STATUS PILLS ── */
+  /* PILLS */
   .pill {
     display: inline-block;
     padding: 1px 5px;
-    border-radius: 8px;
-    font-size: 6pt;
-    font-weight: 700;
+    border-radius: 7px;
+    font-size: 5.8pt;
+    font-weight: bold;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    line-height: 1.5;
   }
-  .pill-red    { background: #FDECEA; color: var(--accent-red); }
-  .pill-amber  { background: #FEF8E7; color: var(--accent-amber); }
-  .pill-green  { background: #E8F5EE; color: var(--accent-green); }
+  .pill-red   { background: #FDECEA; color: #9B2335; }
+  .pill-amber { background: #FEF8E7; color: #B8860B; }
 
-  /* ── DECISION CARDS ── */
-  .decision-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4px;
-  }
-  .decision-card {
-    background: var(--copper-ghost);
-    border-top: 2px solid var(--copper-light);
-    padding: 4px 6px;
-    border-radius: 0 0 3px 3px;
-  }
-  .decision-card .d-title {
+  /* DECISION CARDS — 2x3 grid using table */
+  .dcards {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 3px;
     font-size: 6.8pt;
-    font-weight: 700;
-    color: var(--copper-dark);
-    margin-bottom: 1.5px;
   }
-  .decision-card .d-body {
-    font-size: 6.6pt;
-    color: var(--text-mid);
+  .dcards td {
+    background: #FBF3EC;
+    border-top: 2px solid #D4956A;
+    padding: 4px 6px;
+    vertical-align: top;
+    width: 50%;
+  }
+  .dcards .dtitle {
+    font-weight: bold;
+    color: #7A3B1E;
+    font-size: 6.8pt;
+    margin-bottom: 2px;
+    display: block;
+  }
+  .dcards .dbody {
+    font-size: 6.4pt;
+    color: #5C3320;
     line-height: 1.3;
   }
 
-  /* ── NEXT STEP BANNER ── */
-  .next-step {
-    grid-column: 1 / -1;
-    background: linear-gradient(90deg, var(--copper-dark), var(--copper-mid));
-    border-radius: 3px;
-    padding: 6px 12px;
+  /* BANNER */
+  .banner {
+    margin: 7px 16px 0;
+    background: #8B4010;
+    padding: 6px 11px;
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-top: 6px;
   }
-  .next-step .ns-label {
-    font-size: 6.5pt;
-    font-weight: 700;
+  .banner-lbl {
+    font-size: 6.3pt;
+    font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--copper-pale);
+    letter-spacing: 0.09em;
+    color: #EDD5B8;
     white-space: nowrap;
+    min-width: 58px;
   }
-  .next-step .ns-text {
-    font-size: 7.4pt;
-    color: var(--white);
-    font-weight: 500;
-    line-height: 1.3;
+  .banner-txt {
+    font-size: 7.2pt;
+    color: #FFFFFF;
+    line-height: 1.35;
   }
-  .next-step .ns-text strong { color: var(--copper-pale); font-weight: 700; }
+  .banner-txt b { color: #EDD5B8; }
 
-  /* ── FOOTER ── */
+  /* FOOTER */
   .footer {
-    background: var(--copper-dark);
-    padding: 4px 18px;
+    background: #6B2F10;
+    padding: 4px 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: auto;
+    margin-top: 6px;
   }
   .footer span {
-    font-size: 6pt;
-    color: var(--copper-pale);
-    letter-spacing: 0.05em;
-  }
-  .footer .doc-ref { font-weight: 600; }
-
-  /* ── PRINT ── */
-  @media print {
-    @page {
-      size: A4;
-      margin: 0;
-    }
-    body {
-      width: 210mm;
-      height: 297mm;
-      overflow: hidden;
-    }
-    .footer { position: fixed; bottom: 0; width: 100%; }
+    font-size: 5.8pt;
+    color: #EDD5B8;
+    letter-spacing: 0.04em;
   }
 </style>
 </head>
@@ -293,60 +229,48 @@
 
 <!-- HEADER -->
 <div class="header">
-  <div class="header-left">
+  <div>
     <h1>Espiner — Bag Strength Test Development</h1>
     <h2>Bag Clamp Fixture &nbsp;|&nbsp; Design Session Progress Report</h2>
   </div>
   <div class="header-right">
-    <div class="label">Prepared by</div>
-    <div class="value">Suhas Sundaresh K — simple design people</div>
-    <div class="label" style="margin-top:4px;">Period &nbsp;|&nbsp; Machine</div>
-    <div class="value">16–24 March 2026 &nbsp;|&nbsp; Mark-10 F755 EM</div>
+    <div class="lbl">Prepared by</div>
+    <div class="val">Suhas Sundaresh K — simple design people</div>
+    <div class="lbl" style="margin-top:3px;">Period &nbsp;|&nbsp; Machine</div>
+    <div class="val">16–24 March 2026 &nbsp;|&nbsp; Mark-10 F755 EM</div>
   </div>
 </div>
-<div class="confidential-bar">Confidential &nbsp;·&nbsp; ISO 13485:2016 &nbsp;·&nbsp; All materials SS 316 throughout &nbsp;·&nbsp; Full material certs required</div>
+<div class="conf-bar">Confidential &nbsp;·&nbsp; ISO 13485:2016 &nbsp;·&nbsp; All materials SS 316 throughout &nbsp;·&nbsp; Full material certs required</div>
 
-<!-- BODY -->
-<div class="body">
+<!-- SUMMARY -->
+<div class="summary">
+  <p>A full design session was completed for the mechanical clamping fixture holding a <b>ripstop nylon conical bag</b> during destructive compression testing at <b>590 N</b>. All component geometries are defined, key design decisions are locked, and structural calculations are verified. The design is ready for Fusion 360 CAD finalisation — one primary measurement task remains before machining release.</p>
+</div>
 
-  <!-- SUMMARY -->
-  <div class="summary-strip">
-    <p>A full design session was completed for the mechanical clamping fixture holding a <strong>ripstop nylon conical bag</strong> during destructive compression testing at <strong>590 N</strong>. All component geometries are defined, key design decisions are locked, and structural calculations are verified. The design is ready for Fusion 360 CAD finalisation — one primary measurement task remains before machining release.</p>
-  </div>
+<!-- TWO COLUMNS -->
+<div class="cols">
 
-  <!-- LEFT COLUMN -->
-  <div class="col-left">
+  <!-- LEFT -->
+  <div class="col-l">
 
-    <div class="section-title">Accomplishments This Session</div>
-    <ul class="accomplish-list">
-      <li>
-        <span class="bullet"><svg viewBox="0 0 10 10"><polyline points="2,5 4.5,7.5 8,2.5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></span>
-        <span class="item-text"><b>Bag geometry confirmed</b> — Clamp plane Ø67.8 mm, upper ref Ø73.2 mm, taper ~8.1° half-angle</span>
-      </li>
-      <li>
-        <span class="bullet"><svg viewBox="0 0 10 10"><polyline points="2,5 4.5,7.5 8,2.5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></span>
-        <span class="item-text"><b>Clamping principle finalised</b> — Conical SS surfaces + 1 mm Shore 20A silicone liners. Dual grip: threaded rod (torque-controlled) + self-energising wedge at 8.1° self-locking boundary</span>
-      </li>
-      <li>
-        <span class="bullet"><svg viewBox="0 0 10 10"><polyline points="2,5 4.5,7.5 8,2.5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></span>
-        <span class="item-text"><b>All 7 component dimensions defined</b> — Bottom plate, ×4 standoffs, top plate, split collar, support ring, silicone liners, closing rods</span>
-      </li>
-      <li>
-        <span class="bullet"><svg viewBox="0 0 10 10"><polyline points="2,5 4.5,7.5 8,2.5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></span>
-        <span class="item-text"><b>Structural calculations verified</b> — All safety factors confirmed (see table)</span>
-      </li>
-      <li>
-        <span class="bullet"><svg viewBox="0 0 10 10"><polyline points="2,5 4.5,7.5 8,2.5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></span>
-        <span class="item-text"><b>5 documents produced</b> — ENG-CLJIG-001 Rev E, weekly report, CAD dimensions ref, ring cross-sections, this summary</span>
-      </li>
-      <li>
-        <span class="bullet"><svg viewBox="0 0 10 10"><polyline points="2,5 4.5,7.5 8,2.5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></span>
-        <span class="item-text"><b>9 hours effort</b> — 5 hrs CAD + 4 hrs design development</span>
-      </li>
+    <div class="sec sec-first">Accomplishments This Session</div>
+    <ul class="blist">
+      <li><span class="dot"></span><span><b>Bag geometry confirmed</b> — Clamp plane Ø67.8 mm, upper ref Ø73.2 mm, taper ~8.1° half-angle</span></li>
+      <li><span class="dot"></span><span><b>Clamping principle finalised</b> — Conical SS surfaces + 1 mm Shore 20A silicone liners. Dual grip: threaded rod (torque-controlled) + self-energising wedge at 8.1° self-locking boundary</span></li>
+      <li><span class="dot"></span><span><b>All 7 component dimensions defined</b> — Bottom plate, ×4 standoffs, top plate, split collar, support ring, silicone liners, closing rods</span></li>
+      <li><span class="dot"></span><span><b>Structural calculations verified</b> — All safety factors confirmed (see table)</span></li>
+      <li><span class="dot"></span><span><b>5 documents produced</b> — ENG-CLJIG-001 Rev E, weekly report, CAD dimensions ref, ring cross-sections, this summary</span></li>
+      <li><span class="dot"></span><span><b>9 hours effort</b> — 5 hrs CAD + 4 hrs design development</span></li>
     </ul>
 
-    <div class="section-title" style="margin-top:8px;">Structural Calculations Verified</div>
+    <div class="sec">Structural Calculations Verified</div>
     <table>
+      <colgroup>
+        <col style="width:30%">
+        <col style="width:48%">
+        <col style="width:12%">
+        <col style="width:10%">
+      </colgroup>
       <thead>
         <tr>
           <th>Check</th>
@@ -357,37 +281,37 @@
       </thead>
       <tbody>
         <tr>
-          <td>Standoff stiffness</td>
+          <td class="label-col">Standoff stiffness</td>
           <td>k = 2,897 N/mm → δ = 0.19 mm at 560 N</td>
           <td>—</td>
           <td class="pass">✓</td>
         </tr>
         <tr>
-          <td>Standoff fatigue</td>
+          <td class="label-col">Standoff fatigue</td>
           <td>14.1 MPa bending vs 120 MPa endurance</td>
           <td>8.5×</td>
           <td class="pass">✓</td>
         </tr>
         <tr>
-          <td>Ring wall (min section)</td>
+          <td class="label-col">Ring wall (min)</td>
           <td>3.4 mm wall, thick-walled cylinder</td>
           <td>9.5×</td>
           <td class="pass">✓</td>
         </tr>
         <tr>
-          <td>Friction grip</td>
+          <td class="label-col">Friction grip</td>
           <td>697 N grip &gt; 590 N test load</td>
           <td>&gt;1×</td>
           <td class="pass">✓</td>
         </tr>
         <tr>
-          <td>Dovetail root stub</td>
+          <td class="label-col">Dovetail root stub</td>
           <td>16 mm — adequate</td>
           <td>—</td>
           <td class="pass">✓</td>
         </tr>
         <tr>
-          <td>Assembly clearance</td>
+          <td class="label-col">Assembly clearance</td>
           <td>2.5 mm each side — elastomer through bore</td>
           <td>—</td>
           <td class="pass">✓</td>
@@ -397,79 +321,90 @@
 
   </div>
 
-  <!-- RIGHT COLUMN -->
-  <div class="col-right">
+  <!-- RIGHT -->
+  <div class="col-r">
 
-    <div class="section-title">Key Design Decisions Locked</div>
-    <div class="decision-grid">
-      <div class="decision-card">
-        <div class="d-title">Dovetail Retention</div>
-        <div class="d-body">Through male dovetail rail (60°, 12 mm). Collar slides into plate — shoulders resist uplift at bag failure. Zero retention fasteners.</div>
-      </div>
-      <div class="decision-card">
-        <div class="d-title">Leadscrew Closing</div>
-        <div class="d-body">Half A = fixed jaw. Half B driven by ×2 M8 rods. Guided by dovetail walls — cannot skew regardless of tightening sequence.</div>
-      </div>
-      <div class="decision-card">
-        <div class="d-title">Half A Adjustability</div>
-        <div class="d-body">M6×0.75 fine-pitch screw + slotted lock bolts. Bore centreline alignable with machine axis. Position recorded in DHF per session.</div>
-      </div>
-      <div class="decision-card">
-        <div class="d-title">Bore Surface Finish</div>
-        <div class="d-body">Ra 3.2–6.3 µm — deliberate roughness for silicone RTV mechanical key. As-machined, no finishing pass — reduces cost.</div>
-      </div>
-      <div class="decision-card">
-        <div class="d-title">Base Plate Fixing</div>
-        <div class="d-body">5-bolt pattern: 4× #10-32 UNF + 1× ½-20 UNC. Countersinks on top face. No Mark-10 modification required.</div>
-      </div>
-      <div class="decision-card">
-        <div class="d-title">Elastomer Cone — Rejected</div>
-        <div class="d-body">Cone on TP to stabilise ring — rejected. Ring already stabilised by clamped bag wall. Revisit after first test data only.</div>
-      </div>
-    </div>
+    <div class="sec sec-first">Key Design Decisions Locked</div>
+    <table class="dcards">
+      <tr>
+        <td>
+          <span class="dtitle">Dovetail Retention</span>
+          <span class="dbody">Through male dovetail rail (60°, 12 mm). Collar slides into plate — shoulders resist uplift at bag failure. Zero retention fasteners.</span>
+        </td>
+        <td>
+          <span class="dtitle">Leadscrew Closing</span>
+          <span class="dbody">Half A = fixed jaw. Half B driven by ×2 M8 rods. Guided by dovetail walls — cannot skew regardless of tightening sequence.</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="dtitle">Half A Adjustability</span>
+          <span class="dbody">M6×0.75 fine-pitch screw + slotted lock bolts. Bore centreline alignable with machine axis. Position recorded in DHF per session.</span>
+        </td>
+        <td>
+          <span class="dtitle">Bore Surface Finish</span>
+          <span class="dbody">Ra 3.2–6.3 µm — deliberate roughness for silicone RTV mechanical key. As-machined, no finishing pass — reduces cost.</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="dtitle">Base Plate Fixing</span>
+          <span class="dbody">5-bolt pattern: 4× #10-32 UNF + 1× ½-20 UNC. Countersinks on top face. No Mark-10 modification required.</span>
+        </td>
+        <td>
+          <span class="dtitle">Elastomer Cone — Rejected</span>
+          <span class="dbody">Cone on TP to stabilise ring — rejected. Ring already stabilised by clamped bag wall. Revisit after first test data only.</span>
+        </td>
+      </tr>
+    </table>
 
-    <div class="section-title" style="margin-top:8px;">Pending Before Machining Release</div>
+    <div class="sec">Pending Before Machining Release</div>
     <table>
+      <colgroup>
+        <col style="width:32%">
+        <col style="width:52%">
+        <col style="width:16%">
+      </colgroup>
       <thead>
         <tr>
           <th>Item</th>
-          <th>Action</th>
+          <th>Action Required</th>
           <th>Priority</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Bag taper angle</td>
+          <td class="label-col">Bag taper angle</td>
           <td>Measure 5+ bags at 4+ heights — all dims depend on this</td>
           <td><span class="pill pill-red">Blocker</span></td>
         </tr>
         <tr>
-          <td>Top plate dims</td>
+          <td class="label-col">Top plate dims</td>
           <td>Confirm rectangle dimensions in Fusion 360</td>
           <td><span class="pill pill-amber">CAD</span></td>
         </tr>
         <tr>
-          <td>Half A fixing holes</td>
-          <td>Confirm positions in CAD — clear of dovetail &amp; rod holes</td>
+          <td class="label-col">Half A fixing holes</td>
+          <td>Confirm positions — clear of dovetail &amp; rod holes</td>
           <td><span class="pill pill-amber">CAD</span></td>
         </tr>
         <tr>
-          <td>M8 rod hole positions</td>
+          <td class="label-col">M8 rod hole positions</td>
           <td>Min 12 mm clearance above/below bore edges</td>
           <td><span class="pill pill-amber">CAD</span></td>
         </tr>
         <tr>
-          <td>Standoff bolt circle</td>
+          <td class="label-col">Standoff bolt circle</td>
           <td>Maximise spread within plate footprint</td>
           <td><span class="pill pill-amber">CAD</span></td>
         </tr>
         <tr>
-          <td>Clamping torque protocol</td>
+          <td class="label-col">Clamping torque</td>
           <td>Establish from first test — suggested 5 Nm per rod</td>
           <td><span class="pill pill-amber">Test</span></td>
         </tr>
         <tr>
-          <td>Rod &amp; fastener lengths</td>
+          <td class="label-col">Rod &amp; fastener lengths</td>
           <td>Calculate from assembled CAD model</td>
           <td><span class="pill pill-amber">CAD</span></td>
         </tr>
@@ -478,18 +413,18 @@
 
   </div>
 
-  <!-- NEXT STEP BANNER -->
-  <div class="next-step">
-    <div class="ns-label">Immediate<br>Next Step</div>
-    <div class="ns-text"><strong>Measure 5+ bag samples at 4+ heights each</strong> to confirm taper angle. This single task unblocks all remaining bore and ring dimensions and enables full machining release. Current 8.1° derived from 2 measurements on 1 bag only — insufficient for production.</div>
-  </div>
+</div>
 
+<!-- BANNER -->
+<div class="banner">
+  <div class="banner-lbl">Immediate<br>Next Step</div>
+  <div class="banner-txt"><b>Measure 5+ bag samples at 4+ heights each</b> to confirm taper angle. This single task unblocks all remaining bore and ring dimensions and enables full machining release. Current 8.1° is derived from 2 measurements on 1 bag only — insufficient for production.</div>
 </div>
 
 <!-- FOOTER -->
 <div class="footer">
   <span>Espiner — Bag Strength Test Development &nbsp;|&nbsp; Bag Clamp Fixture &nbsp;|&nbsp; 16–24 March 2026</span>
-  <span class="doc-ref">ENG-CLJIG-001 Rev E &nbsp;|&nbsp; simple design people &nbsp;|&nbsp; CONFIDENTIAL</span>
+  <span>ENG-CLJIG-001 Rev E &nbsp;|&nbsp; simple design people &nbsp;|&nbsp; CONFIDENTIAL</span>
 </div>
 
 </body>
