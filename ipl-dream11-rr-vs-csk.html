@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RR vs CSK — Dream11 Team | IPL 2026 Match 3</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --copper-dark:   #7A3B1E;
+    --copper-mid:    #B5621E;
+    --copper:        #C8782A;
+    --copper-light:  #D4956A;
+    --copper-pale:   #EDD5B8;
+    --copper-ghost:  #FBF3EC;
+    --copper-rule:   #C8782A33;
+    --text-dark:     #2C1508;
+    --text-mid:      #5C3320;
+    --white:         #FFFFFF;
+    --green:         #2E7D4F;
+    --amber:         #B8860B;
+    --red:           #9B2335;
+    --blue:          #1A5276;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 7.6pt;
+    color: var(--text-dark);
+    background: var(--white);
+    width: 210mm;
+    min-height: 297mm;
+    line-height: 1.35;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, var(--copper-dark) 0%, var(--copper-mid) 55%, var(--copper) 100%);
+    padding: 11px 18px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 3px solid var(--copper-light);
+  }
+  .header-left h1 {
+    font-size: 14pt;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+  }
+  .header-left h2 {
+    font-size: 8pt;
+    font-weight: 400;
+    color: var(--copper-pale);
+    margin-top: 3px;
+    letter-spacing: 0.04em;
+  }
+  .header-right { text-align: right; }
+  .header-right .label {
+    font-size: 6.2pt;
+    color: var(--copper-pale);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+  }
+  .header-right .value {
+    font-size: 7.5pt;
+    color: var(--white);
+    font-weight: 600;
+    margin-top: 1px;
+  }
+  .sub-bar {
+    background: var(--copper-dark);
+    padding: 3px 18px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 6.2pt;
+    color: var(--copper-pale);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* BODY */
+  .body {
+    padding: 10px 18px 8px;
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 0 13px;
+  }
+
+  .section-title {
+    font-size: 6.8pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--copper-mid);
+    border-bottom: 1.5px solid var(--copper);
+    padding-bottom: 2px;
+    margin-bottom: 5px;
+    margin-top: 9px;
+  }
+  .section-title:first-child { margin-top: 0; }
+
+  /* ALERT STRIP */
+  .alert-strip {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 5px;
+    margin-bottom: 3px;
+  }
+  .alert-card {
+    background: var(--copper-ghost);
+    border-top: 2.5px solid var(--copper);
+    padding: 5px 7px;
+    border-radius: 0 0 3px 3px;
+  }
+  .alert-card .a-label {
+    font-size: 6pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--copper-mid);
+    margin-bottom: 1.5px;
+  }
+  .alert-card .a-val {
+    font-size: 7.3pt;
+    font-weight: 600;
+    color: var(--text-dark);
+    line-height: 1.3;
+  }
+  .alert-card .a-sub {
+    font-size: 6.2pt;
+    color: var(--text-mid);
+    margin-top: 1px;
+    line-height: 1.3;
+  }
+
+  /* PLAYER TABLE */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 7.2pt;
+  }
+  thead tr { background: var(--copper); }
+  thead th {
+    padding: 3px 5px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 6.4pt;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+  tbody tr:nth-child(even) { background: var(--copper-ghost); }
+  tbody tr:nth-child(odd)  { background: var(--white); }
+  tbody td {
+    padding: 3px 5px;
+    color: var(--text-dark);
+    vertical-align: middle;
+    border-bottom: 0.5px solid var(--copper-rule);
+  }
+
+  .role-badge {
+    display: inline-block;
+    padding: 1px 5px;
+    border-radius: 8px;
+    font-size: 6pt;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .wk   { background: #E8F0FE; color: #1A5276; }
+  .bat  { background: #E8F5EE; color: var(--green); }
+  .all  { background: #FEF8E7; color: var(--amber); }
+  .bowl { background: #FDECEA; color: var(--red); }
+
+  .team-rr { color: #00A1E4; font-weight: 700; font-size: 6.8pt; }
+  .team-csk { color: #F7C31A; background: #2C1508; padding: 0 3px; border-radius: 2px; font-weight: 700; font-size: 6.8pt; }
+
+  .cap-badge {
+    display: inline-block;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    font-size: 6.8pt;
+    font-weight: 800;
+    text-align: center;
+    line-height: 16px;
+    margin-left: 3px;
+  }
+  .cap  { background: var(--copper-dark); color: var(--white); }
+  .vcap { background: var(--copper-light); color: var(--white); }
+
+  .player-name { font-weight: 600; color: var(--text-dark); }
+
+  /* RIGHT COLUMN CARDS */
+  .col-left  { grid-column: 1; }
+  .col-right { grid-column: 2; }
+
+  .info-card {
+    background: var(--copper-ghost);
+    border-left: 3px solid var(--copper);
+    padding: 5px 7px;
+    margin-bottom: 5px;
+    border-radius: 0 3px 3px 0;
+  }
+  .info-card .ic-title {
+    font-size: 6.8pt;
+    font-weight: 700;
+    color: var(--copper-dark);
+    margin-bottom: 2px;
+  }
+  .info-card ul { list-style: none; }
+  .info-card ul li {
+    font-size: 7pt;
+    color: var(--text-mid);
+    padding: 1.5px 0;
+    border-bottom: 0.5px solid var(--copper-rule);
+    line-height: 1.3;
+  }
+  .info-card ul li:last-child { border-bottom: none; }
+  .info-card ul li b { color: var(--copper-dark); font-weight: 600; }
+
+  .swap-card {
+    background: var(--white);
+    border: 1px solid var(--copper-pale);
+    border-top: 2px solid var(--copper-light);
+    padding: 4px 7px;
+    margin-bottom: 4px;
+    border-radius: 3px;
+  }
+  .swap-card .s-title {
+    font-size: 6.5pt;
+    font-weight: 700;
+    color: var(--copper-mid);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 2px;
+  }
+  .swap-card p {
+    font-size: 6.8pt;
+    color: var(--text-mid);
+    line-height: 1.35;
+  }
+  .swap-card p b { color: var(--text-dark); }
+
+  /* BOTTOM BANNER */
+  .bottom-banner {
+    grid-column: 1 / -1;
+    background: linear-gradient(90deg, var(--copper-dark), var(--copper-mid));
+    border-radius: 3px;
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 6px;
+  }
+  .bb-label {
+    font-size: 6.5pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--copper-pale);
+    white-space: nowrap;
+    min-width: 60px;
+  }
+  .bb-text {
+    font-size: 7.2pt;
+    color: var(--white);
+    line-height: 1.35;
+  }
+  .bb-text strong { color: var(--copper-pale); font-weight: 700; }
+
+  /* FOOTER */
+  .footer {
+    background: var(--copper-dark);
+    padding: 4px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer span { font-size: 6pt; color: var(--copper-pale); letter-spacing: 0.05em; }
+
+  @media print {
+    @page { size: A4; margin: 0; }
+    body { width: 210mm; height: 297mm; overflow: hidden; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <h1>RR vs CSK &nbsp;—&nbsp; Dream11 Team</h1>
+    <h2>IPL 2026 &nbsp;·&nbsp; Match 3 &nbsp;·&nbsp; Barsapara Cricket Stadium, Guwahati</h2>
+  </div>
+  <div class="header-right">
+    <div class="label">Date &amp; Time</div>
+    <div class="value">30 March 2026 &nbsp;·&nbsp; 7:30 PM IST</div>
+    <div class="label" style="margin-top:4px;">Toss</div>
+    <div class="value">7:00 PM IST — Lock team after toss</div>
+  </div>
+</div>
+<div class="sub-bar">
+  <span>Rajasthan Royals &nbsp;vs&nbsp; Chennai Super Kings</span>
+  <span>⚠️ &nbsp;Fantasy sports carry financial risk — play responsibly</span>
+</div>
+
+<!-- BODY -->
+<div class="body">
+
+  <!-- MATCH CONTEXT STRIP -->
+  <div class="alert-strip">
+    <div class="alert-card">
+      <div class="a-label">Pitch</div>
+      <div class="a-val">Batting-friendly</div>
+      <div class="a-sub">Avg score 175–185. Shorter boundaries, fast outfield</div>
+    </div>
+    <div class="alert-card">
+      <div class="a-label">Dew Factor</div>
+      <div class="a-val">High — Chase favoured</div>
+      <div class="a-sub">Spinners struggle in 2nd innings. Batting gets easier</div>
+    </div>
+    <div class="alert-card">
+      <div class="a-label">Weather</div>
+      <div class="a-val">Rain risk 30%</div>
+      <div class="a-sub">Cloudy, humid, 22°C. Confirm match on before locking</div>
+    </div>
+    <div class="alert-card">
+      <div class="a-label">H2H Record</div>
+      <div class="a-val">RR lead 8 of last 9</div>
+      <div class="a-sub">Overall: CSK 16 – RR 15 in 31 matches</div>
+    </div>
+  </div>
+
+  <!-- LEFT — PLAYER TABLE -->
+  <div class="col-left">
+    <div class="section-title">Recommended Dream11 XI</div>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Player</th>
+          <th>Team</th>
+          <th>Role</th>
+          <th>Why Pick</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td class="player-name">Sanju Samson</td>
+          <td><span class="team-csk">CSK</span></td>
+          <td><span class="role-badge wk">WK</span></td>
+          <td>Faces former franchise. Top form, high motivation</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td class="player-name">Yashasvi Jaiswal</td>
+          <td><span class="team-rr">RR</span></td>
+          <td><span class="role-badge bat">BAT</span></td>
+          <td>Explosive opener — must-have every game</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td class="player-name">Ayush Mhatre</td>
+          <td><span class="team-csk">CSK</span></td>
+          <td><span class="role-badge bat">BAT</span></td>
+          <td>71% probability of 30+ score — strong differential</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td class="player-name">Ruturaj Gaikwad <span class="cap-badge vcap">V</span></td>
+          <td><span class="team-csk">CSK</span></td>
+          <td><span class="role-badge bat">BAT</span></td>
+          <td>Captain, anchor batter, consistent in pressure games</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td class="player-name">Vaibhav Sooryavanshi</td>
+          <td><span class="team-rr">RR</span></td>
+          <td><span class="role-badge bat">BAT</span></td>
+          <td>58% chance of 30+ — young gun, attacking style</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td class="player-name">Ravindra Jadeja <span class="cap-badge cap">C</span></td>
+          <td><span class="team-rr">RR</span></td>
+          <td><span class="role-badge all">ALL</span></td>
+          <td>Faces ex-team. 170 IPL wickets + batting. Best value pick</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td class="player-name">Shivam Dube</td>
+          <td><span class="team-csk">CSK</span></td>
+          <td><span class="role-badge all">ALL</span></td>
+          <td>Big-hitter, suits batting-friendly conditions</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td class="player-name">Jofra Archer</td>
+          <td><span class="team-rr">RR</span></td>
+          <td><span class="role-badge bowl">BOWL</span></td>
+          <td>36% chance of 2+ wickets. Powerplay pace threat</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td class="player-name">Ravi Bishnoi</td>
+          <td><span class="team-rr">RR</span></td>
+          <td><span class="role-badge bowl">BOWL</span></td>
+          <td>Leg spin, key middle-overs wicket-taker</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td class="player-name">Noor Ahmad</td>
+          <td><span class="team-csk">CSK</span></td>
+          <td><span class="role-badge bowl">BOWL</span></td>
+          <td>Wrist spin weapon if pitch slows in middle overs</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td class="player-name">Khaleel Ahmed</td>
+          <td><span class="team-csk">CSK</span></td>
+          <td><span class="role-badge bowl">BOWL</span></td>
+          <td>Left-arm pace, dangerous with new ball</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:5px; background:var(--copper-ghost); border-radius:3px; padding:4px 7px; font-size:6.6pt; color:var(--text-mid);">
+      <b style="color:var(--copper-dark);">Team balance:</b> &nbsp;1 WK &nbsp;·&nbsp; 4 BAT &nbsp;·&nbsp; 2 ALL &nbsp;·&nbsp; 4 BOWL &nbsp;&nbsp;|&nbsp;&nbsp;
+      <b style="color:var(--copper-dark);">Split:</b> &nbsp;RR: 6 &nbsp;·&nbsp; CSK: 5 &nbsp;&nbsp;|&nbsp;&nbsp;
+      <b style="color:var(--copper-dark);">C:</b> Jadeja &nbsp;·&nbsp; <b style="color:var(--copper-dark);">VC:</b> Gaikwad
+    </div>
+  </div>
+
+  <!-- RIGHT COLUMN -->
+  <div class="col-right">
+
+    <div class="section-title">Captain &amp; VC Logic</div>
+    <div class="info-card">
+      <div class="ic-title">🅒 Captain — Ravindra Jadeja (RR)</div>
+      <ul>
+        <li>Faces former franchise CSK — emotionally elevated</li>
+        <li>170 IPL wickets across 254 matches</li>
+        <li>Contributes with bat AND ball — double points value</li>
+        <li>Pitch suits spin in middle overs</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <div class="ic-title">🅥 Vice-Captain — Ruturaj Gaikwad (CSK)</div>
+      <ul>
+        <li>CSK captain — consistent top-order performer</li>
+        <li>Anchor role, accumulates points steadily</li>
+        <li>Handles pressure situations well</li>
+      </ul>
+    </div>
+
+    <div class="section-title">Injury &amp; Availability Alerts</div>
+    <div class="info-card" style="border-left-color: var(--red);">
+      <ul>
+        <li><b>MS Dhoni (CSK)</b> — OUT. Calf injury, first 2 weeks</li>
+        <li><b>Dewald Brevis (CSK)</b> — OUT. Side strain</li>
+        <li><b>Sam Curran (RR)</b> — OUT. Injury. Adjust if replacement named</li>
+      </ul>
+    </div>
+
+    <div class="section-title">Swap Options</div>
+    <div class="swap-card">
+      <div class="s-title">If pitch plays very slow</div>
+      <p>Swap <b>Khaleel Ahmed</b> → <b>Tushar Deshpande</b> (RR seamer)</p>
+    </div>
+    <div class="swap-card">
+      <div class="s-title">Budget saving option</div>
+      <p>Swap <b>Shivam Dube</b> → <b>Donnovan Ferreira</b> (RR all-rounder)</p>
+    </div>
+    <div class="swap-card">
+      <div class="s-title">If toss goes bat first</div>
+      <p>Consider <b>Matt Short</b> (CSK) over <b>Ayush Mhatre</b> for batting stability</p>
+    </div>
+    <div class="swap-card">
+      <div class="s-title">Alternative captain if Jadeja rested</div>
+      <p><b>Sanju Samson</b> as C — facing ex-team, high ceiling</p>
+    </div>
+
+  </div>
+
+  <!-- BOTTOM BANNER -->
+  <div class="bottom-banner">
+    <div class="bb-label">Lock After<br>Toss</div>
+    <div class="bb-text">
+      <strong>Chasing team confirmed at toss</strong> — elevate those batters. Rain at 30%: confirm match is on before locking.
+      <strong>Riyan Parag</strong> playing home city Guwahati — potential differential captain if you want to go bold.
+      <strong>Playing XIs</strong> may change at toss — always verify before submitting.
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span>IPL 2026 &nbsp;·&nbsp; Match 3 &nbsp;·&nbsp; RR vs CSK &nbsp;·&nbsp; 30 March 2026 &nbsp;·&nbsp; Barsapara Stadium, Guwahati</span>
+  <span>Sources: CricketAddictor · CricTracker · Sportskeeda · Business Standard &nbsp;·&nbsp; ⚠ For informational purposes only</span>
+</div>
+
+</body>
+</html>
