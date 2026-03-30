@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Espiner — Bag Strength Test Development | Progress Report</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 7.6pt;
+    color: #2C1508;
+    background: #FFFFFF;
+    width: 210mm;
+    line-height: 1.35;
+  }
+
+  /* HEADER */
+  .header {
+    background: #8B4010;
+    padding: 10px 16px 9px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 3px solid #D4956A;
+  }
+  .header h1 {
+    font-size: 12.5pt;
+    font-weight: bold;
+    color: #FFFFFF;
+    line-height: 1.1;
+  }
+  .header h2 {
+    font-size: 7.5pt;
+    font-weight: normal;
+    color: #EDD5B8;
+    margin-top: 2px;
+  }
+  .header-right { text-align: right; }
+  .header-right .lbl {
+    font-size: 6pt;
+    color: #EDD5B8;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .header-right .val {
+    font-size: 7pt;
+    color: #FFFFFF;
+    font-weight: bold;
+    margin-top: 1px;
+  }
+
+  .conf-bar {
+    background: #6B2F10;
+    padding: 2px 16px;
+    font-size: 5.8pt;
+    color: #EDD5B8;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  /* SUMMARY */
+  .summary {
+    margin: 8px 16px 6px;
+    background: #FBF3EC;
+    border-left: 3px solid #C8782A;
+    padding: 5px 9px;
+  }
+  .summary p {
+    font-size: 7.3pt;
+    color: #5C3320;
+    line-height: 1.4;
+  }
+  .summary b { color: #7A3B1E; }
+
+  /* TWO COLUMNS */
+  .cols {
+    display: flex;
+    gap: 12px;
+    padding: 0 16px;
+    margin-top: 6px;
+  }
+  .col-l { width: 52%; flex-shrink: 0; }
+  .col-r { width: 48%; flex-shrink: 0; }
+
+  /* SECTION TITLE */
+  .sec {
+    font-size: 6.6pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: #B5621E;
+    border-bottom: 1.5px solid #C8782A;
+    padding-bottom: 2px;
+    margin-bottom: 5px;
+    margin-top: 8px;
+  }
+  .sec-first { margin-top: 0; }
+
+  /* BULLET LIST */
+  .blist { list-style: none; }
+  .blist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+    margin-bottom: 3px;
+    font-size: 7.3pt;
+  }
+  .dot {
+    width: 12px;
+    height: 12px;
+    min-width: 12px;
+    border-radius: 50%;
+    background: #C8782A;
+    margin-top: 1px;
+    display: inline-block;
+  }
+  .blist b { color: #7A3B1E; }
+
+  /* TABLES */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 6.9pt;
+  }
+  thead tr { background: #C8782A; }
+  thead th {
+    padding: 3px 5px;
+    text-align: left;
+    font-weight: bold;
+    font-size: 6.2pt;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+  }
+  tbody tr:nth-child(even) { background: #FBF3EC; }
+  tbody tr:nth-child(odd)  { background: #FFFFFF; }
+  tbody td {
+    padding: 2.5px 5px;
+    vertical-align: top;
+    border-bottom: 0.5px solid rgba(200,120,42,0.25);
+  }
+  td.label-col { font-weight: bold; color: #7A3B1E; }
+  .pass { color: #2E7D4F; font-weight: bold; }
+
+  /* PILLS */
+  .pill {
+    display: inline-block;
+    padding: 1px 5px;
+    border-radius: 7px;
+    font-size: 5.8pt;
+    font-weight: bold;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .pill-red   { background: #FDECEA; color: #9B2335; }
+  .pill-amber { background: #FEF8E7; color: #B8860B; }
+
+  /* DECISION CARDS — 2x3 grid using table */
+  .dcards {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 3px;
+    font-size: 6.8pt;
+  }
+  .dcards td {
+    background: #FBF3EC;
+    border-top: 2px solid #D4956A;
+    padding: 4px 6px;
+    vertical-align: top;
+    width: 50%;
+  }
+  .dcards .dtitle {
+    font-weight: bold;
+    color: #7A3B1E;
+    font-size: 6.8pt;
+    margin-bottom: 2px;
+    display: block;
+  }
+  .dcards .dbody {
+    font-size: 6.4pt;
+    color: #5C3320;
+    line-height: 1.3;
+  }
+
+  /* BANNER */
+  .banner {
+    margin: 7px 16px 0;
+    background: #8B4010;
+    padding: 6px 11px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .banner-lbl {
+    font-size: 6.3pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: #EDD5B8;
+    white-space: nowrap;
+    min-width: 58px;
+  }
+  .banner-txt {
+    font-size: 7.2pt;
+    color: #FFFFFF;
+    line-height: 1.35;
+  }
+  .banner-txt b { color: #EDD5B8; }
+
+  /* FOOTER */
+  .footer {
+    background: #6B2F10;
+    padding: 4px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 6px;
+  }
+  .footer span {
+    font-size: 5.8pt;
+    color: #EDD5B8;
+    letter-spacing: 0.04em;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div>
+    <h1>Espiner — Bag Strength Test Development</h1>
+    <h2>Bag Clamp Fixture &nbsp;|&nbsp; Design Session Progress Report</h2>
+  </div>
+  <div class="header-right">
+    <div class="lbl">Prepared by</div>
+    <div class="val">Suhas Sundaresh K — simple design people</div>
+    <div class="lbl" style="margin-top:3px;">Period &nbsp;|&nbsp; Machine</div>
+    <div class="val">16–24 March 2026 &nbsp;|&nbsp; Mark-10 F755 EM</div>
+  </div>
+</div>
+<div class="conf-bar">Confidential &nbsp;·&nbsp; ISO 13485:2016 &nbsp;·&nbsp; All materials SS 316 throughout &nbsp;·&nbsp; Full material certs required</div>
+
+<!-- SUMMARY -->
+<div class="summary">
+  <p>A full design session was completed for the mechanical clamping fixture holding a <b>ripstop nylon conical bag</b> during destructive compression testing at <b>590 N</b>. All component geometries are defined, key design decisions are locked, and structural calculations are verified. The design is ready for Fusion 360 CAD finalisation — one primary measurement task remains before machining release.</p>
+</div>
+
+<!-- TWO COLUMNS -->
+<div class="cols">
+
+  <!-- LEFT -->
+  <div class="col-l">
+
+    <div class="sec sec-first">Accomplishments This Session</div>
+    <ul class="blist">
+      <li><span class="dot"></span><span><b>Bag geometry confirmed</b> — Clamp plane Ø67.8 mm, upper ref Ø73.2 mm, taper ~8.1° half-angle</span></li>
+      <li><span class="dot"></span><span><b>Clamping principle finalised</b> — Conical SS surfaces + 1 mm Shore 20A silicone liners. Dual grip: threaded rod (torque-controlled) + self-energising wedge at 8.1° self-locking boundary</span></li>
+      <li><span class="dot"></span><span><b>All 7 component dimensions defined</b> — Bottom plate, ×4 standoffs, top plate, split collar, support ring, silicone liners, closing rods</span></li>
+      <li><span class="dot"></span><span><b>Structural calculations verified</b> — All safety factors confirmed (see table)</span></li>
+      <li><span class="dot"></span><span><b>5 documents produced</b> — ENG-CLJIG-001 Rev E, weekly report, CAD dimensions ref, ring cross-sections, this summary</span></li>
+      <li><span class="dot"></span><span><b>9 hours effort</b> — 5 hrs CAD + 4 hrs design development</span></li>
+    </ul>
+
+    <div class="sec">Structural Calculations Verified</div>
+    <table>
+      <colgroup>
+        <col style="width:30%">
+        <col style="width:48%">
+        <col style="width:12%">
+        <col style="width:10%">
+      </colgroup>
+      <thead>
+        <tr>
+          <th>Check</th>
+          <th>Result</th>
+          <th>SF</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="label-col">Standoff stiffness</td>
+          <td>k = 2,897 N/mm → δ = 0.19 mm at 560 N</td>
+          <td>—</td>
+          <td class="pass">✓</td>
+        </tr>
+        <tr>
+          <td class="label-col">Standoff fatigue</td>
+          <td>14.1 MPa bending vs 120 MPa endurance</td>
+          <td>8.5×</td>
+          <td class="pass">✓</td>
+        </tr>
+        <tr>
+          <td class="label-col">Ring wall (min)</td>
+          <td>3.4 mm wall, thick-walled cylinder</td>
+          <td>9.5×</td>
+          <td class="pass">✓</td>
+        </tr>
+        <tr>
+          <td class="label-col">Friction grip</td>
+          <td>697 N grip &gt; 590 N test load</td>
+          <td>&gt;1×</td>
+          <td class="pass">✓</td>
+        </tr>
+        <tr>
+          <td class="label-col">Dovetail root stub</td>
+          <td>16 mm — adequate</td>
+          <td>—</td>
+          <td class="pass">✓</td>
+        </tr>
+        <tr>
+          <td class="label-col">Assembly clearance</td>
+          <td>2.5 mm each side — elastomer through bore</td>
+          <td>—</td>
+          <td class="pass">✓</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <!-- RIGHT -->
+  <div class="col-r">
+
+    <div class="sec sec-first">Key Design Decisions Locked</div>
+    <table class="dcards">
+      <tr>
+        <td>
+          <span class="dtitle">Dovetail Retention</span>
+          <span class="dbody">Through male dovetail rail (60°, 12 mm). Collar slides into plate — shoulders resist uplift at bag failure. Zero retention fasteners.</span>
+        </td>
+        <td>
+          <span class="dtitle">Leadscrew Closing</span>
+          <span class="dbody">Half A = fixed jaw. Half B driven by ×2 M8 rods. Guided by dovetail walls — cannot skew regardless of tightening sequence.</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="dtitle">Half A Adjustability</span>
+          <span class="dbody">M6×0.75 fine-pitch screw + slotted lock bolts. Bore centreline alignable with machine axis. Position recorded in DHF per session.</span>
+        </td>
+        <td>
+          <span class="dtitle">Bore Surface Finish</span>
+          <span class="dbody">Ra 3.2–6.3 µm — deliberate roughness for silicone RTV mechanical key. As-machined, no finishing pass — reduces cost.</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="dtitle">Base Plate Fixing</span>
+          <span class="dbody">5-bolt pattern: 4× #10-32 UNF + 1× ½-20 UNC. Countersinks on top face. No Mark-10 modification required.</span>
+        </td>
+        <td>
+          <span class="dtitle">Elastomer Cone — Rejected</span>
+          <span class="dbody">Cone on TP to stabilise ring — rejected. Ring already stabilised by clamped bag wall. Revisit after first test data only.</span>
+        </td>
+      </tr>
+    </table>
+
+    <div class="sec">Pending Before Machining Release</div>
+    <table>
+      <colgroup>
+        <col style="width:32%">
+        <col style="width:52%">
+        <col style="width:16%">
+      </colgroup>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Action Required</th>
+          <th>Priority</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="label-col">Bag taper angle</td>
+          <td>Measure 5+ bags at 4+ heights — all dims depend on this</td>
+          <td><span class="pill pill-red">Blocker</span></td>
+        </tr>
+        <tr>
+          <td class="label-col">Top plate dims</td>
+          <td>Confirm rectangle dimensions in Fusion 360</td>
+          <td><span class="pill pill-amber">CAD</span></td>
+        </tr>
+        <tr>
+          <td class="label-col">Half A fixing holes</td>
+          <td>Confirm positions — clear of dovetail &amp; rod holes</td>
+          <td><span class="pill pill-amber">CAD</span></td>
+        </tr>
+        <tr>
+          <td class="label-col">M8 rod hole positions</td>
+          <td>Min 12 mm clearance above/below bore edges</td>
+          <td><span class="pill pill-amber">CAD</span></td>
+        </tr>
+        <tr>
+          <td class="label-col">Standoff bolt circle</td>
+          <td>Maximise spread within plate footprint</td>
+          <td><span class="pill pill-amber">CAD</span></td>
+        </tr>
+        <tr>
+          <td class="label-col">Clamping torque</td>
+          <td>Establish from first test — suggested 5 Nm per rod</td>
+          <td><span class="pill pill-amber">Test</span></td>
+        </tr>
+        <tr>
+          <td class="label-col">Rod &amp; fastener lengths</td>
+          <td>Calculate from assembled CAD model</td>
+          <td><span class="pill pill-amber">CAD</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</div>
+
+<!-- BANNER -->
+<div class="banner">
+  <div class="banner-lbl">Immediate<br>Next Step</div>
+  <div class="banner-txt"><b>Measure 5+ bag samples at 4+ heights each</b> to confirm taper angle. This single task unblocks all remaining bore and ring dimensions and enables full machining release. Current 8.1° is derived from 2 measurements on 1 bag only — insufficient for production.</div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span>Espiner — Bag Strength Test Development &nbsp;|&nbsp; Bag Clamp Fixture &nbsp;|&nbsp; 16–24 March 2026</span>
+  <span>ENG-CLJIG-001 Rev E &nbsp;|&nbsp; simple design people &nbsp;|&nbsp; CONFIDENTIAL</span>
+</div>
+
+</body>
+</html>
